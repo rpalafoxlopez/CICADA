@@ -14,7 +14,7 @@ export default async function Slideshow(params) {
   if (!eventId) {
     container.innerHTML = `
       <div class="error" style="position: relative; z-index: 101;">
-        <div class="landing-badge" style="margin-bottom: 1rem;">🟡 CICADA</div>
+        <div class="landing-badge" style="margin-bottom: 1rem;">✦ LUMIO</div>
         <h1>Evento no encontrado</h1>
         <a href="/" class="text-link">Volver al inicio</a>
       </div>
@@ -32,10 +32,10 @@ export default async function Slideshow(params) {
     infoEl.className = 'slideshow-info';
     infoEl.innerHTML = `
       <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
-        <span style="font-size: 0.75rem;">🟡</span>
+        <span style="font-size: 0.75rem;">✦</span>
         <h3 style="font-size: 1rem;">${escapeHtml(event.title)}</h3>
       </div>
-      <p style="font-size: 0.75rem; color: #aaa;" id="photo-count">${photos.length} pulsos</p>
+      <p style="font-size: 0.75rem; color: #aaa;" id="photo-count">${photos.length} fotos</p>
     `;
     container.appendChild(infoEl);
 
@@ -122,7 +122,7 @@ export default async function Slideshow(params) {
       allPhotos.push(newPhoto);
       renderPolaroids(allPhotos, event.title, polaroidsContainer);
       updateCount(allPhotos.length);
-      showToast('📸 Nuevo pulso recibido', 'success');
+      showToast('📸 Nueva foto recibida', 'success');
     });
 
     container.addEventListener('remove', () => {
@@ -133,7 +133,7 @@ export default async function Slideshow(params) {
   } catch (err) {
     container.innerHTML = `
       <div class="error" style="position: relative; z-index: 101;">
-        <div class="landing-badge" style="margin-bottom: 1rem;">🟡 CICADA</div>
+        <div class="landing-badge" style="margin-bottom: 1rem;">✦ LUMIO</div>
         <h1>Error</h1>
         <p>${err.message}</p>
         <a href="/" class="text-link">Volver al inicio</a>
@@ -150,8 +150,8 @@ function renderPolaroids(photos, caption, container) {
   if (photos.length === 0) {
     container.innerHTML = `
       <div style="text-align: center; color: #888; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-        <p style="font-size: 1.25rem; margin-bottom: 0.5rem;">Silencio...</p>
-        <p style="font-size: 0.875rem;">Los pulsos aparecerán cuando el enjambre empiece a capturar</p>
+        <p style="font-size: 1.25rem; margin-bottom: 0.5rem;">Sin fotos aún...</p>
+        <p style="font-size: 0.875rem;">Las fotos aparecerán cuando empiecen a capturar</p>
       </div>
     `;
     return;
@@ -177,7 +177,7 @@ function renderPolaroids(photos, caption, container) {
 
 function updateCount(count) {
   const el = document.getElementById('photo-count');
-  if (el) el.textContent = `${count} pulso${count !== 1 ? 's' : ''}`;
+  if (el) el.textContent = `${count} foto${count !== 1 ? 's' : ''}`;
 }
 
 function escapeHtml(text) {

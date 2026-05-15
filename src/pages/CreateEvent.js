@@ -8,7 +8,6 @@ export default async function CreateEvent(params) {
   const container = document.createElement('div');
   container.className = 'page-container';
 
-  // Si viene ?showQr=xxx, mostrar QR de evento existente
   const showQrFor = params.get('showQr');
   if (showQrFor) {
     try {
@@ -17,7 +16,7 @@ export default async function CreateEvent(params) {
 
       container.innerHTML = `
         <div class="page-header">
-          <div class="landing-badge" style="margin-bottom: 1rem;">🟡 CICADA</div>
+          <div class="landing-badge" style="margin-bottom: 1rem;">✦ LUMIO</div>
           <h1>QR del Evento</h1>
           <p>${event.title}</p>
         </div>
@@ -36,10 +35,9 @@ export default async function CreateEvent(params) {
     }
   }
 
-  // Formulario de creación
   container.innerHTML = `
     <div class="page-header">
-      <div class="landing-badge" style="margin-bottom: 1rem;">🟡 CICADA</div>
+      <div class="landing-badge" style="margin-bottom: 1rem;">✦ LUMIO</div>
       <h1>Nuevo Evento</h1>
       <p>Configura tu photo booth</p>
     </div>
@@ -98,7 +96,7 @@ export default async function CreateEvent(params) {
       qrSection.innerHTML = `
         <div class="page-header" style="margin-top: 2rem;">
           <h2>¡Evento creado! 🎊</h2>
-          <p>Escanea el QR para unirte al enjambre</p>
+          <p>Escanea el QR para unirte</p>
         </div>
       `;
       qrSection.appendChild(qrEl);

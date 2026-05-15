@@ -9,7 +9,7 @@ export default async function Camera(params) {
     container.className = 'page-container';
     container.innerHTML = `
       <div class="error">
-        <div class="landing-badge" style="margin-bottom: 1rem;">🟡 CICADA</div>
+        <div class="landing-badge" style="margin-bottom: 1rem;">✦ LUMIO</div>
         <h1>Evento inválido</h1>
         <p>Escanea un QR válido para acceder a la cámara</p>
         <a href="/" class="text-link">Volver al inicio</a>
@@ -23,7 +23,7 @@ export default async function Camera(params) {
 
   container.innerHTML = `
     <div style="position: absolute; top: 1rem; left: 1rem; z-index: 51;">
-      <span style="font-size: 0.75rem; color: rgba(255,255,255,0.7); font-weight: 600;">🟡 CICADA</span>
+      <span style="font-size: 0.75rem; color: rgba(255,255,255,0.7); font-weight: 600;">✦ LUMIO</span>
     </div>
     <video id="viewfinder" autoplay playsinline muted></video>
     <canvas id="capture-canvas" style="display:none"></canvas>
@@ -157,7 +157,7 @@ export default async function Camera(params) {
           takenBy: getDeviceId(),
         });
 
-        showToast('📸 Pulso capturado', 'success');
+        showToast('📸 Foto guardada', 'success');
       } catch (err) {
         console.error('Error subiendo foto:', err);
         showToast('Error guardando foto', 'error');

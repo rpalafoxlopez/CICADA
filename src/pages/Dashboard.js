@@ -8,9 +8,9 @@ export default async function Dashboard() {
 
   container.innerHTML = `
     <div class="page-header">
-      <div class="landing-badge" style="margin-bottom: 1rem;">🟡 CICADA</div>
+      <div class="landing-badge" style="margin-bottom: 1rem;">✦ LUMIO</div>
       <h1>Mis Eventos</h1>
-      <p>Gestiona tus enjambres</p>
+      <p>Gestiona tus eventos</p>
     </div>
 
     <button id="new-event-btn" class="btn" style="margin-bottom: 1.5rem;">
@@ -33,8 +33,8 @@ export default async function Dashboard() {
     if (events.length === 0) {
       eventsList.innerHTML = `
         <div class="card" style="text-align: center; color: #888;">
-          <p style="font-size: 1.125rem; margin-bottom: 0.5rem;">Silencio bajo tierra...</p>
-          <p style="font-size: 0.875rem;">Crea tu primer CICADA arriba 👆</p>
+          <p style="font-size: 1.125rem; margin-bottom: 0.5rem;">Sin eventos aún...</p>
+          <p style="font-size: 0.875rem;">Crea tu primer evento arriba 👆</p>
         </div>
       `;
     } else {
@@ -89,11 +89,11 @@ export default async function Dashboard() {
     } else if (action === 'gallery') {
       window.open(`/gallery?event=${eventId}`, '_blank');
     } else if (action === 'delete') {
-      if (!confirm('¿Eliminar este CICADA y todas sus fotos?')) return;
+      if (!confirm('¿Eliminar este evento y todas sus fotos?')) return;
       try {
         await EventService.deleteEvent(eventId);
         btn.closest('.event-card').remove();
-        showToast('CICADA eliminado', 'success');
+        showToast('Evento eliminado', 'success');
       } catch (err) {
         showToast('Error eliminando: ' + err.message, 'error');
       }

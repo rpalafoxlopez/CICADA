@@ -5,7 +5,6 @@ export default async function Login() {
   const container = document.createElement('div');
   container.className = 'page-container';
 
-  // Verificar si ya hay sesión
   const { data: { session } } = await supabase.auth.getSession();
   if (session) {
     navigate('/dashboard');
@@ -14,9 +13,9 @@ export default async function Login() {
 
   container.innerHTML = `
     <div class="page-header">
-      <div class="landing-badge" style="margin-bottom: 1rem;">🟡 CICADA</div>
+      <div class="landing-badge" style="margin-bottom: 1rem;">✦ LUMIO</div>
       <h1>Acceso para organizadores</h1>
-      <p>Crea y gestiona tus eventos CICADA</p>
+      <p>Crea y gestiona tus eventos</p>
     </div>
 
     <div class="card">

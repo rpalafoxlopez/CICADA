@@ -1,4 +1,5 @@
 import { navigate } from '../main.js';
+import { supabase } from '../supabase.js';
 
 export default async function LandingPage() {
   const container = document.createElement('div');
@@ -7,18 +8,18 @@ export default async function LandingPage() {
   container.innerHTML = `
     <section class="landing-hero">
       <div class="landing-hero-content">
-        <div class="landing-badge">🟡 CICADA</div>
+        <div class="landing-badge">✦ LUMIO</div>
         <h1 class="landing-title">
-          El ruido que no ves,<br>
-          <span class="landing-accent">la fiesta que no olvidas.</span>
+          Brilla.<br>
+          <span class="landing-accent">Comparte. Permanece.</span>
         </h1>
         <p class="landing-subtitle">
-          Cada invitado es una cámara. Cada foto es un pulso. 
-          La galería es el zumbido colectivo que queda.
+          Cada invitado es una cámara. Cada foto, un destello.
+          La galería es la luz colectiva que queda.
         </p>
         <div class="landing-cta">
           <button id="btn-start" class="btn btn-landing">Crear mi evento →</button>
-          <p class="landing-cta-note">Sin instalación. Solo un QR y un enjambre de cámaras.</p>
+          <p class="landing-cta-note">Sin instalación. Solo un QR y una galería que brilla en tiempo real.</p>
         </div>
       </div>
       <div class="landing-visual">
@@ -38,40 +39,33 @@ export default async function LandingPage() {
     </section>
 
     <section class="landing-how">
-      <h2 class="landing-section-title">El ciclo de emergencia</h2>
+      <h2 class="landing-section-title">Tres momentos. Un evento.</h2>
       <div class="landing-steps">
         <div class="landing-step">
           <div class="step-number">1</div>
-          <div class="step-icon">🌱</div>
-          <h3>Emerger</h3>
-          <p>Creas el evento, subes la música y generas el QR. Silencio antes del zumbido.</p>
+          <div class="step-icon">✦</div>
+          <h3>Brilla</h3>
+          <p>Creas el evento, subes la música y generas el QR. Tu evento cobra luz.</p>
         </div>
         <div class="landing-step-arrow">→</div>
         <div class="landing-step">
           <div class="step-number">2</div>
           <div class="step-icon">📸</div>
-          <h3>Zumbar</h3>
-          <p>Los invitados escanean el QR, acceden a la cámara y capturan. Flash tras flash.</p>
+          <h3>Comparte</h3>
+          <p>Los invitados escanean el QR, acceden a la cámara y capturan. Flash tras flash, la galería crece.</p>
         </div>
         <div class="landing-step-arrow">→</div>
         <div class="landing-step">
           <div class="step-number">3</div>
-          <div class="step-icon">🎵</div>
-          <h3>Resonar</h3>
-          <p>Las fotos aparecen en tiempo real en la galería Polaroid con música de fondo.</p>
-        </div>
-        <div class="landing-step-arrow">→</div>
-        <div class="landing-step">
-          <div class="step-number">4</div>
           <div class="step-icon">💾</div>
-          <h3>Permanecer</h3>
-          <p>Descargas todo como ZIP. El evento termina. El registro permanece para siempre.</p>
+          <h3>Permanece</h3>
+          <p>Descarga todo como ZIP. El evento termina. La memoria es tuya para siempre.</p>
         </div>
       </div>
     </section>
 
     <section class="landing-features">
-      <h2 class="landing-section-title">Lo que zumba</h2>
+      <h2 class="landing-section-title">Lo que hace brillar a Lumio</h2>
       <div class="landing-features-grid">
         <div class="feature-card">
           <div class="feature-icon">📷</div>
@@ -85,8 +79,8 @@ export default async function LandingPage() {
         </div>
         <div class="feature-card">
           <div class="feature-icon">⚡</div>
-          <h4>Tiempo real</h4>
-          <p>La foto que acabas de tomar ya aparece en la galería. Sin refrescar, sin esperar.</p>
+          <h4>Galería en tiempo real</h4>
+          <p>La foto que acabas de tomar ya brilla en la galería. Sin refrescar, sin esperar.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🎶</div>
@@ -95,7 +89,7 @@ export default async function LandingPage() {
         </div>
         <div class="feature-card">
           <div class="feature-icon">📲</div>
-          <h4>QR mágico</h4>
+          <h4>Acceso por QR</h4>
           <p>Un código. Todos los invitados. Cero configuración, cero cuentas para los fotógrafos.</p>
         </div>
         <div class="feature-card">
@@ -107,24 +101,27 @@ export default async function LandingPage() {
     </section>
 
     <section class="landing-cta-bottom">
-      <h2>Tu evento está a punto de emerger.</h2>
-      <p>Crea un CICADA. Deja que tus invitados sean el enjambre.</p>
+      <h2>Tu evento está a punto de brillar.</h2>
+      <p>Crea tu Lumio. Deja que cada invitado sea parte de la luz.</p>
       <button id="btn-start-bottom" class="btn btn-landing">Crear mi evento gratis →</button>
-      <p class="landing-cta-note">Zero backend propio. Zero costo de servidor. Solo pura emergencia.</p>
     </section>
 
     <footer class="landing-footer">
-      <p>CICADA 🟡 — Emergé, zumba, permanece.</p>
+      <p>Lumio ✦ — Brilla. Comparte. Permanece.</p>
     </footer>
   `;
 
-  // Navegación
-  container.querySelector('#btn-start').addEventListener('click', () => {
-    navigate('/');
-  });
-  container.querySelector('#btn-start-bottom').addEventListener('click', () => {
-    navigate('/');
-  });
+  async function handleStart() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      navigate('/event/new');
+    } else {
+      navigate('/login');
+    }
+  }
+
+  container.querySelector('#btn-start').addEventListener('click', handleStart);
+  container.querySelector('#btn-start-bottom').addEventListener('click', handleStart);
 
   return container;
 }
